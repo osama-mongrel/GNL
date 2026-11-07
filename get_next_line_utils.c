@@ -3,56 +3,112 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oben-el <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: oben-el <oben-el@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/05 16:41:51 by oben-el           #+#    #+#             */
-/*   Updated: 2026/11/05 16:54:37 by oben-el          ###   ########.fr       */
+/*   Created: 2026/11/07 13:01:23 by oben-el           #+#    #+#             */
+/*   Updated: 2026/11/07 13:01:25 by oben-el          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strchr(char *s, char c)
+int	contains_newline(const char *s)
 {
-	if (!s)
-		return (0);
-	while (*s)
-		if (*s++ == c)
-			return (1);
-	return (0);
-}
-
-size_t	ft_strlen(char *s)
-{
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s[i])
+	{
+		if (s[i] == '\n')
+			return (1);
 		i++;
-	return (i);
+	}
+	return (0);
 }
 
-char	*ft_strjoin(char *stash, char *buffer)
+char	*join_strs(const char *s1, const char *s2)
 {
-	char	*new;
-	size_t	i;
-	size_t	j;
-	
-	if (!stash)
-	{
-		stash = malloc(1);
-		stash[0] = '\0';
-	}
-	new = malloc(ft_strlen(stash) + ft_strlen(buffer) + 1);
-	if (!new)
+	char	*s;
+	int		len;
+	int		i;
+
+	len = 0;
+	if (!s1 && !s2)
 		return (NULL);
+	while (s1 && s1[len])
+		len++;
+	i = 0;
+	while (s2 && s2[i])
+		i++;
+	s = ft_malloc_zero(len + i + 1, sizeof * s);
+	if (!s)
+		return (NULL);
+	len = -1;
+	while (s1 && s1[++len])
+		s[len] = s1[len];
 	i = -1;
-	while (stash[++i])
-		new[i] = stash[i];
-	j = 0;
-	while (buffer[j])
-		new[i++] = buffer[j++];
-	new[i] = '\0';
-	free(stash);
-	return (new);
+	while (s2 && s2[++i])
+		s[len + i] = s2[i];
+	return (s);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*s2;
+	int		i;
+
+	if (!s1)
+		return (ft_strdup(""));
+	i = 0;
+	while (s1[i])
+		i++;
+	s2 = ft_malloc_zero(i + 1, sizeof * s2);
+	if (!s2)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	return (s2);
+}
+
+void	*ft_malloc_zero(size_t count, size_t size)
+{
+	void			*r;
+	unsigned char	*p;
+	size_t			total;
+
+	total = count * size;
+	r = malloc(total);
+	if (!r)
+		return (NULL);
+	p = (unsigned char *)r;
+	while (total != 0)
+	{
+		*p = '\0';
+		p++;
+		total--;
+	}
+	return (r);
+}
+
+void	ft_free_strs(char **str, char **str2, char **str3)
+{
+	if (str && *str)
+	{
+		free(*str);
+		*str = NULL;
+	}
+	if (str2 && *str2)
+	{
+		free(*str2);
+		*str2 = NULL;
+	}
+	if (str3 && *str3)
+	{
+		free(*str3);
+		*str3 = NULL;
+	}
 }
