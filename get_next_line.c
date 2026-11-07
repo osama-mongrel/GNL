@@ -6,7 +6,7 @@
 /*   By: oben-el <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/05 14:43:01 by oben-el           #+#    #+#             */
-/*   Updated: 2026/11/05 16:54:34 by oben-el          ###   ########.fr       */
+/*   Updated: 2026/11/07 08:38:48 by oben-el          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,32 @@ char	*extract_line(char	*stash)
 
 int	update_stash(char	**stash, char *line)
 {
-	char	*cleaned;
+	char	*new;
 	size_t	i;
 	size_t	j;
 
 	i = ft_strlen(line);
 	if (!(*stash)[i])
 	{
-		
+		free(*stash);
+		*stash = NULL;
+		return (1);
+	}
+	j = 0;
+	while ((*stash)[i + j])
+		j++;
+	new = malloc(j + 1);
+	if (!new)
+	{
+		free(*stash)
+		*stash = NULL;
+		return (0);
+	}
+	j = -1;
+	while ((*stash)[i + ++j])
+		new[j] = (*stash)[i + ++j];
+	new[j] = '\0';
+	free(*stash);
+	*stash = new;
+	return (1);
 }
