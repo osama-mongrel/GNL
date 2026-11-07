@@ -6,7 +6,7 @@
 /*   By: oben-el <oben-el@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 13:01:23 by oben-el           #+#    #+#             */
-/*   Updated: 2026/11/07 13:01:25 by oben-el          ###   ########.fr       */
+/*   Updated: 2026/11/07 20:50:12 by oben-el          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*join_strs(const char *s1, const char *s2)
 	i = 0;
 	while (s2 && s2[i])
 		i++;
-	s = ft_malloc_zero(len + i + 1, sizeof * s);
+	s = ft_malloc_zero(len + i + 1, sizeof(char));
 	if (!s)
 		return (NULL);
 	len = -1;
@@ -62,7 +62,7 @@ char	*ft_strdup(const char *s1)
 	i = 0;
 	while (s1[i])
 		i++;
-	s2 = ft_malloc_zero(i + 1, sizeof * s2);
+	s2 = ft_malloc_zero(i + 1, sizeof(char));
 	if (!s2)
 		return (NULL);
 	i = 0;

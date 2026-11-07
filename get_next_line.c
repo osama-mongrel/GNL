@@ -6,7 +6,7 @@
 /*   By: oben-el <oben-el@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 13:00:32 by oben-el           #+#    #+#             */
-/*   Updated: 2026/11/07 13:00:37 by oben-el          ###   ########.fr       */
+/*   Updated: 2026/11/07 20:50:09 by oben-el          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_before_newline(const char *s)
 		i++;
 	if (s[i] != '\0' && s[i] == '\n')
 		i++;
-	res = ft_malloc_zero(i + 1, sizeof * res);
+	res = ft_malloc_zero(i + 1, sizeof(char));
 	if (!res)
 		return (NULL);
 	i = 0;
@@ -53,7 +53,7 @@ char	*get_after_newline(const char *s)
 		i++;
 	if (s[i] != '\0' && s[i] == '\n')
 		i++;
-	res = ft_malloc_zero((j - i) + 1, sizeof * res);
+	res = ft_malloc_zero((j - i) + 1, sizeof(char));
 	if (!res)
 		return (NULL);
 	j = 0;
@@ -70,7 +70,7 @@ void	ft_read_line(int fd, char **keep, char **tmp)
 	char	*buf;
 	int		r;
 
-	buf = malloc(sizeof * buf * (BUFFER_SIZE + 1));
+	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return ;
 	r = 1;

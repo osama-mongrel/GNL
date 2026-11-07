@@ -6,7 +6,7 @@
 /*   By: oben-el <oben-el@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 13:01:12 by oben-el           #+#    #+#             */
-/*   Updated: 2026/11/07 13:01:13 by oben-el          ###   ########.fr       */
+/*   Updated: 2026/11/07 20:47:37 by oben-el          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE BUFSIZ
+#  define BUFFER_SIZE 42
 # endif
 
 # if BUFFER_SIZE > 9223372036854775806
