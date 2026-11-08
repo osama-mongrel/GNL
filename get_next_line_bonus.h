@@ -3,25 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oben-el <oben-el@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oben-el <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/07 13:02:57 by oben-el           #+#    #+#             */
-/*   Updated: 2026/11/07 13:03:01 by oben-el          ###   ########.fr       */
+/*   Created: 2026/11/08 08:31:06 by oben-el           #+#    #+#             */
+/*   Updated: 2026/11/08 08:31:15 by oben-el          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include <fcntl.h>
-# include <stddef.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <limits.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE BUFSIZ
+#  define BUFFER_SIZE 42
 # endif
 
 # if BUFFER_SIZE > 9223372036854775806

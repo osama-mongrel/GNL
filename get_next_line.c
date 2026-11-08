@@ -6,7 +6,7 @@
 /*   By: oben-el <oben-el@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 13:00:32 by oben-el           #+#    #+#             */
-/*   Updated: 2026/11/08 07:57:07 by oben-el          ###   ########.fr       */
+/*   Updated: 2026/11/08 08:23:34 by oben-el          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,18 @@ char	*get_before_newline(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0' && s[i] != '\n')
-		i++;
-	if (s[i] != '\0' && s[i] == '\n')
-		i++;
+	while (s[i])
+		if (s[i++] == '\n')
+			break ;
 	res = ft_malloc_zero(i + 1, sizeof(char));
 	if (!res)
 		return (NULL);
 	i = 0;
-	while (s[i] != '\0' && s[i] != '\n')
+	while (s[i])
 	{
 		res[i] = s[i];
-		i++;
-	}
-	if (s[i] == '\n')
-	{
-		res[i] = s[i];
-		i++;
+		if (s[i++] == '\n')
+			break ;
 	}
 	return (res);
 }
@@ -46,13 +41,12 @@ char	*get_after_newline(const char *s)
 	size_t	j;
 
 	j = 0;
-	while (s && s[j])
+	while (s[j])
 		j++;
 	i = 0;
-	while (s[i] != '\0' && s[i] != '\n')
-		i++;
-	if (s[i] != '\0' && s[i] == '\n')
-		i++;
+	while (s[i] != '\0')
+		if (s[i++] == '\n')
+			break ;
 	res = ft_malloc_zero((j - i) + 1, sizeof(char));
 	if (!res)
 		return (NULL);
@@ -65,7 +59,7 @@ char	*get_after_newline(const char *s)
 	return (res);
 }
 
-void	ft_read_line(size_t fd, char **keep, char **tmp)
+void	ft_read_line(int fd, char **keep, char **tmp)
 {
 	char	*buf;
 	ssize_t	r;
@@ -98,14 +92,18 @@ char	*ft_parse_line(char **keep, char **tmp)
 	char	*line;
 
 	*tmp = ft_strdup(*keep);
+	if (!tmp)
+		return (NULL);
 	ft_free_strs(keep, 0, 0);
 	*keep = get_after_newline(*tmp);
+	if (!*keep)
+		return (ft_free_strs(tmp, 0, 0), NULL);
 	line = get_before_newline(*tmp);
 	ft_free_strs(tmp, 0, 0);
 	return (line);
 }
 
-char	*get_next_line(size_t fd)
+char	*get_next_line(int fd)
 {
 	static char	*keep = NULL;
 	char		*tmp;

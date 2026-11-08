@@ -6,18 +6,15 @@
 /*   By: oben-el <oben-el@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 13:01:12 by oben-el           #+#    #+#             */
-/*   Updated: 2026/11/07 20:47:37 by oben-el          ###   ########.fr       */
+/*   Updated: 2026/11/08 08:25:29 by oben-el          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <fcntl.h>
-# include <stddef.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oben-el <oben-el@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oben-el <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/07 13:03:07 by oben-el           #+#    #+#             */
-/*   Updated: 2026/11/07 13:03:10 by oben-el          ###   ########.fr       */
+/*   Created: 2026/11/08 08:32:05 by oben-el           #+#    #+#             */
+/*   Updated: 2026/11/08 08:32:16 by oben-el          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	contains_newline(const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i])
@@ -29,25 +29,25 @@ int	contains_newline(const char *s)
 char	*join_strs(const char *s1, const char *s2)
 {
 	char	*s;
-	int		len;
-	int		i;
+	ssize_t	len;
+	ssize_t	i;
 
 	len = 0;
-	if (!s1 && !s2)
+	if (!s1 || !s2)
 		return (NULL);
-	while (s1 && s1[len])
+	while (s1[len])
 		len++;
 	i = 0;
-	while (s2 && s2[i])
+	while (s2[i])
 		i++;
-	s = ft_malloc_zero(len + i + 1, sizeof * s);
+	s = ft_malloc_zero(len + i + 1, sizeof(char));
 	if (!s)
 		return (NULL);
 	len = -1;
-	while (s1 && s1[++len])
+	while (s1[++len])
 		s[len] = s1[len];
 	i = -1;
-	while (s2 && s2[++i])
+	while (s2[++i])
 		s[len + i] = s2[i];
 	return (s);
 }
@@ -55,14 +55,14 @@ char	*join_strs(const char *s1, const char *s2)
 char	*ft_strdup(const char *s1)
 {
 	char	*s2;
-	int		i;
+	size_t	i;
 
 	if (!s1)
 		return (ft_strdup(""));
 	i = 0;
 	while (s1[i])
 		i++;
-	s2 = ft_malloc_zero(i + 1, sizeof * s2);
+	s2 = ft_malloc_zero(i + 1, sizeof(char));
 	if (!s2)
 		return (NULL);
 	i = 0;
@@ -84,7 +84,7 @@ void	*ft_malloc_zero(size_t count, size_t size)
 	r = malloc(total);
 	if (!r)
 		return (NULL);
-	p = (unsigned char *)r;
+	p = r;
 	while (total != 0)
 	{
 		*p = '\0';

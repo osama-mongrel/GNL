@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oben-el <oben-el@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oben-el <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/07 13:02:40 by oben-el           #+#    #+#             */
-/*   Updated: 2026/11/07 13:02:45 by oben-el          ###   ########.fr       */
+/*   Created: 2026/11/08 08:27:41 by oben-el           #+#    #+#             */
+/*   Updated: 2026/11/08 08:30:00 by oben-el          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,21 @@
 char	*get_before_newline(const char *s)
 {
 	char	*res;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0' && s[i] != '\n')
-		i++;
-	if (s[i] != '\0' && s[i] == '\n')
-		i++;
-	res = ft_malloc_zero(i + 1, sizeof * res);
+	while (s[i])
+		if (s[i++] == '\n')
+			break ;
+	res = ft_malloc_zero(i + 1, sizeof(char));
 	if (!res)
 		return (NULL);
 	i = 0;
-	while (s[i] != '\0' && s[i] != '\n')
+	while (s[i])
 	{
 		res[i] = s[i];
-		i++;
-	}
-	if (s[i] == '\n')
-	{
-		res[i] = s[i];
-		i++;
+		if (s[i++] == '\n')
+			break ;
 	}
 	return (res);
 }
@@ -42,18 +37,17 @@ char	*get_before_newline(const char *s)
 char	*get_after_newline(const char *s)
 {
 	char	*res;
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 
 	j = 0;
-	while (s && s[j])
+	while (s[j])
 		j++;
 	i = 0;
-	while (s[i] != '\0' && s[i] != '\n')
-		i++;
-	if (s[i] != '\0' && s[i] == '\n')
-		i++;
-	res = ft_malloc_zero((j - i) + 1, sizeof * res);
+	while (s[i] != '\0')
+		if (s[i++] == '\n')
+			break ;
+	res = ft_malloc_zero((j - i) + 1, sizeof(char));
 	if (!res)
 		return (NULL);
 	j = 0;
@@ -68,9 +62,9 @@ char	*get_after_newline(const char *s)
 void	ft_read_line(int fd, char **keep, char **tmp)
 {
 	char	*buf;
-	int		r;
+	ssize_t	r;
 
-	buf = malloc(sizeof * buf * (BUFFER_SIZE + 1));
+	buf = malloc(sizeof(char) * ((size_t)BUFFER_SIZE + 1));
 	if (!buf)
 		return ;
 	r = 1;
@@ -98,8 +92,12 @@ char	*ft_parse_line(char **keep, char **tmp)
 	char	*line;
 
 	*tmp = ft_strdup(*keep);
+	if (!tmp)
+		return (NULL);
 	ft_free_strs(keep, 0, 0);
 	*keep = get_after_newline(*tmp);
+	if (!*keep)
+		return (ft_free_strs(tmp, 0, 0), NULL);
 	line = get_before_newline(*tmp);
 	ft_free_strs(tmp, 0, 0);
 	return (line);
