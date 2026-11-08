@@ -6,16 +6,18 @@
 /*   By: oben-el <oben-el@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 13:01:23 by oben-el           #+#    #+#             */
-/*   Updated: 2026/11/07 20:50:12 by oben-el          ###   ########.fr       */
+/*   Updated: 2026/11/08 07:54:23 by oben-el          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	contains_newline(const char *s)
+size_t	contains_newline(const char *s)
 {
-	int	i;
+	size_t	i;
 
+	if (!s)
+		return (1);
 	i = 0;
 	while (s[i])
 	{
@@ -29,11 +31,11 @@ int	contains_newline(const char *s)
 char	*join_strs(const char *s1, const char *s2)
 {
 	char	*s;
-	int		len;
-	int		i;
+	ssize_t	len;
+	ssize_t	i;
 
 	len = 0;
-	if (!s1 && !s2)
+	if (!s1 || !s2)
 		return (NULL);
 	while (s1 && s1[len])
 		len++;
@@ -55,7 +57,7 @@ char	*join_strs(const char *s1, const char *s2)
 char	*ft_strdup(const char *s1)
 {
 	char	*s2;
-	int		i;
+	size_t	i;
 
 	if (!s1)
 		return (ft_strdup(""));

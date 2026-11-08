@@ -6,7 +6,7 @@
 /*   By: oben-el <oben-el@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 13:00:32 by oben-el           #+#    #+#             */
-/*   Updated: 2026/11/07 20:50:09 by oben-el          ###   ########.fr       */
+/*   Updated: 2026/11/08 07:57:07 by oben-el          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*get_before_newline(const char *s)
 {
 	char	*res;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0' && s[i] != '\n')
@@ -42,8 +42,8 @@ char	*get_before_newline(const char *s)
 char	*get_after_newline(const char *s)
 {
 	char	*res;
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 
 	j = 0;
 	while (s && s[j])
@@ -65,12 +65,12 @@ char	*get_after_newline(const char *s)
 	return (res);
 }
 
-void	ft_read_line(int fd, char **keep, char **tmp)
+void	ft_read_line(size_t fd, char **keep, char **tmp)
 {
 	char	*buf;
-	int		r;
+	ssize_t	r;
 
-	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buf = malloc(sizeof(char) * ((size_t)BUFFER_SIZE + 1));
 	if (!buf)
 		return ;
 	r = 1;
@@ -105,7 +105,7 @@ char	*ft_parse_line(char **keep, char **tmp)
 	return (line);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(size_t fd)
 {
 	static char	*keep = NULL;
 	char		*tmp;
